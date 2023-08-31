@@ -1,7 +1,6 @@
 # 📗 Table of Contents
 
 - [📗 Table of Contents](#-table-of-contents)
-- [📖 Create Your Own Enumerable ](#-create-your-own-enumerable-)
   - [🛠 Built With ](#-built-with-)
     - [Tech Stack ](#tech-stack-)
     - [Key Features ](#key-features-)
@@ -79,8 +78,6 @@ Example command:
   cd my-project
   bundle install
 ```
-
--
 
 ### Usage
 
