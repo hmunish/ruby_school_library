@@ -65,7 +65,7 @@ Example commands:
 
 ```sh
   git clone git@github.com:hmunish/ruby_school_library.git
-  cd Create-your-own-enumerable
+  cd ruby_school_library
 ```
 
 ### Install
