@@ -1,8 +1,8 @@
 # rubocop:disable Metrics
 require_relative 'app'
 class Exe
-    def initialize(user_option)
-        @app = App.new
+  def initialize(user_option)
+    @app = App.new
     @user_option = user_option
   end
 
