@@ -16,11 +16,21 @@ class Exe
       Main.new.display_ui
 
     when 3
-      App.create_person
+      print ' Do you want to create a student (1) or a teacher (2) ? [input the number] :'
+      person_type = gets.chomp.to_i
+      print 'Age: '
+      age = gets.chomp.to_i
+      print 'Name: '
+      name = gets.chomp.to_s
+      App.create_person(name, age, person_type)
       Main.new.display_ui
 
     when 4
-      App.create_book
+      print 'Title: '
+      title = gets.chomp.to_s
+      print 'Author: '
+      author = gets.chomp.to_s
+      App.create_book(title, author)
       Main.new.display_ui
 
     when 5

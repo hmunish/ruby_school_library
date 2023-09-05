@@ -17,14 +17,12 @@ class App
     Classroom.new(label)
   end
 
-  def self.create_person
-    print ' Do you want to create a student (1) or a teacher (2) ? [input the number] :'
-    person_type = gets.chomp.to_i
+  def self.create_person(name, age, person_type)
     case person_type
     when 1
-      create_student
+      create_student(name, age)
     when 2
-      create_teacher
+      create_teacher(name, age)
     else
       puts 'Invalid choice. Please enter a valid option.'
       execute(3)
@@ -32,11 +30,7 @@ class App
     puts 'Person created successfully'
   end
 
-  def self.create_student
-    print 'Age: '
-    age = gets.chomp.to_i
-    print 'Name: '
-    name = gets.chomp.to_s
+  def self.create_student(name, age)
     print 'Has parent permission ? [Y/N]: '
     choice = gets.chomp
     if %w[Y y].include?(choice)
@@ -46,21 +40,13 @@ class App
     end
   end
 
-  def self.create_teacher
-    print 'Age: '
-    teacher_age = gets.chomp.to_i
-    print 'Name: '
-    teacher_name = gets.chomp.to_s
+  def self.create_teacher(name, age)
     print 'Specialization: '
     specialization = gets.chomp.to_s
-    Teacher.new(specialization, teacher_age, teacher_name)
+    Teacher.new(age, specialization, name)
   end
 
-  def self.create_book
-    print 'Title: '
-    title = gets.chomp.to_s
-    print 'Author: '
-    author = gets.chomp.to_s
+  def self.create_book(title, author)
     Book.new(title, author)
     puts 'Book created successfully'
   end
