@@ -105,6 +105,12 @@ Deployment is not available yet.
 - Twitter: [@twitterhandle](https://twitter.com/hmunish5)
 - LinkedIn: [LinkedIn](https://linkedin.com/in/munish-halai)
 
+👤 **Abd elhakim Zayan**
+
+- GitHub: [@Abd elhakim Zayan](https://github.com/abdozayan12)
+- Twitter: [@Abd elhakim Zayan](https://twitter.com/zayan_abdo)
+- LinkedIn: [@Abd elhakim Zayan](https://www.linkedin.com/in/abdozayan/)
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## 🔭 Future Features <a name="future-features"></a>
