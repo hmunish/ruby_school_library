@@ -1,6 +1,5 @@
 require_relative 'app'
 require_relative 'exe'
-# rubocop:disable Metrics
 
 class Main
   def display_ui
@@ -17,7 +16,5 @@ class Main
     Exe.new(user_choice).exe
   end
 end
-# rubocop:enable Metrics
-
 puts 'Welcome in Ruby School Library App!'
 Main.new.display_ui
