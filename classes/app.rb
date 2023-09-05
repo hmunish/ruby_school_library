@@ -5,19 +5,25 @@ require_relative 'book'
 require_relative 'classroom'
 
 class App
-  def self.list_books
+  def initialize
+    @persons = []
+    @books = []
+    @rentals = []
+  end
+
+  def list_books
     Book.all.map { |book| puts "Title: #{book.title}, Author: #{book.author}" }
   end
 
-  def self.list_persons
+  def list_persons
     Person.all.map { |person| puts "ID: #{person.id} , Name: #{person.name}, Age: #{person.age}" }
   end
 
-  def self.create_classroom(label)
+  def create_classroom(label)
     Classroom.new(label)
   end
 
-  def self.create_person(name, age, person_type)
+  def create_person(name, age, person_type)
     case person_type
     when 1
       create_student(name, age)
@@ -30,28 +36,31 @@ class App
     puts 'Person created successfully'
   end
 
-  def self.create_student(name, age)
+  def create_student(name, age)
     print 'Has parent permission ? [Y/N]: '
     choice = gets.chomp
     if %w[Y y].include?(choice)
-      Student.new(age, name, parent_permission: true)
+      student = Student.new(age, name, parent_permission: true)
     elsif %w[N n].include?(choice)
-      Student.new(age, name, parent_permission: false)
+      student = Student.new(age, name, parent_permission: false)
     end
+    @persons << student
   end
 
-  def self.create_teacher(name, age)
+  def create_teacher(name, age)
     print 'Specialization: '
     specialization = gets.chomp.to_s
-    Teacher.new(age, specialization, name)
+    teacher = Teacher.new(age, specialization, name)
+    @persons << teacher
   end
 
-  def self.create_book(title, author)
-    Book.new(title, author)
+  def create_book(title, author)
+    book = Book.new(title, author)
+    @books << book
     puts 'Book created successfully'
   end
 
-  def self.create_rental
+  def create_rental
     puts 'Select a book from the following list by number'
     Book.all.map.with_index do |book, index|
       puts " (#{index + 1}) Title: #{book.title}, Author: #{book.author}"
@@ -68,11 +77,12 @@ class App
 
     print 'Date: '
     date = gets.chomp
-    Rental.new(date, rental_person, rental_book)
+    rental = Rental.new(date, rental_person, rental_book)
+    @rentals << rental
     puts 'Rental created successfully'
   end
 
-  def self.list_rentals
+  def list_rentals
     print 'ID of person: '
     id = gets.chomp.to_i
     person = Person.all.select { |x| x.id == id }[0]

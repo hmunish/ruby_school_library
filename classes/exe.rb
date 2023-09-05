@@ -1,6 +1,8 @@
 # rubocop:disable Metrics
+require_relative 'app'
 class Exe
-  def initialize(user_option)
+    def initialize(user_option)
+        @app = App.new
     @user_option = user_option
   end
 
@@ -8,11 +10,11 @@ class Exe
     case @user_option
 
     when 1
-      puts App.list_books
+      puts @app.list_books
       Main.new.display_ui
 
     when 2
-      puts App.list_persons
+      puts @app.list_persons
       Main.new.display_ui
 
     when 3
@@ -22,7 +24,7 @@ class Exe
       age = gets.chomp.to_i
       print 'Name: '
       name = gets.chomp.to_s
-      App.create_person(name, age, person_type)
+      @app.create_person(name, age, person_type)
       Main.new.display_ui
 
     when 4
@@ -30,15 +32,15 @@ class Exe
       title = gets.chomp.to_s
       print 'Author: '
       author = gets.chomp.to_s
-      App.create_book(title, author)
+      @app.create_book(title, author)
       Main.new.display_ui
 
     when 5
-      App.create_rental
+      @app.create_rental
       Main.new.display_ui
 
     when 6
-      App.list_rentals
+      @app.list_rentals
       Main.new.display_ui
 
     when 7
