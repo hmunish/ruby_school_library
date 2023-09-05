@@ -14,6 +14,41 @@ def display_ui
   puts user_choice
   execute(user_choice)
 end
+
+def execute(user_choice)
+  case user_choice
+
+  when 1
+    puts App.list_books
+    display_ui
+
+  when 2
+    puts App.list_persons
+    display_ui
+
+  when 3
+    App.create_person
+    display_ui
+
+  when 4
+    App.create_book
+    display_ui
+
+  when 5
+    App.create_rental
+    display_ui
+
+  when 6
+    App.list_rentals
+    display_ui
+
+  when 7
+    abort 'Thank you so much for using the ruby school app.!'
+
+  else
+    puts ' Invalid selection. Please enter a valid option'
+    display_ui
+  end
 end
 # rubocop:enable Metrics
 
