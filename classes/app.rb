@@ -98,7 +98,7 @@ class App
   end
 
   def save_data
-    books = Book.all.map {|book| {title: book.title, author: book.author}}
+    books = Book.all.map { |book| { title: book.title, author: book.author } }
     people = Person.all.map do |person|
       { id: person.id, age: person.age, name: person.name, rental: [] }
     end
@@ -120,6 +120,9 @@ class App
     puts 'Saved successfully!'
   end
 
+  # rubocop:disable Metrics/MethodLength
+  # rubocop:disable Metrics/Layout/LineLength
+  # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
   def load_data
     if File.exist?('people.json')
       file_data = File.read('people.json')
@@ -135,13 +138,17 @@ class App
         Book.new(data['title'], data['author'])
       end
     end
-    if File.exist?('rentals.json')
-      file_data = File.read('rentals.json')
-      rentals_data = JSON.parse(file_data)
-      rentals_data.map do |data|
-        Rental.new(data['date'], Person.all.find {|person| person.id === data['person']['id']}, Book.all.find {|book| book.title === data['book']['title']})
-      end
+    return unless File.exist?('rentals.json')
+
+    file_data = File.read('rentals.json')
+    rentals_data = JSON.parse(file_data)
+    rentals_data.map do |data|
+      Rental.new(data['date'], Person.all.find { |person| person.id == data['person']['id'] }, Book.all.find do |book|
+                                                                                                 book.title == data['book']['title']
+                                                                                               end)
     end
   end
-      
 end
+# rubocop:enable Metrics/MethodLength
+# rubocop:enable Metrics/Layout/LineLength
+# rubocop:enable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity

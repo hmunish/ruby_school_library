@@ -8,11 +8,11 @@ class Person < Nameable
 
   def initialize(age, name = 'Unknown', id = 'unset', parent_permission: true)
     super()
-    if (id === 'unset') 
-      @id = Random.rand(1..1000)
-    else 
-      @id = id 
-    end
+    @id = if id == 'unset'
+            Random.rand(1..1000)
+          else
+            id
+          end
     @age = age
     @name = name
     @parent_permission = parent_permission
