@@ -1,4 +1,5 @@
 require './classes/student'
+require './classes/classroom'
 
 describe Student do
   context 'When testing Student class' do
@@ -14,6 +15,12 @@ describe Student do
 
     it 'should return true' do
       expect(student.play_hooky).to eq '¯(ツ)/¯'
+    end
+
+    it 'should add classrom' do
+      new_classroom = Classroom.new('test_classroom')
+      student.classroom = new_classroom
+      expect(student.classroom).to be new_classroom
     end
   end
 end

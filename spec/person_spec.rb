@@ -15,5 +15,13 @@ describe Person do
     it 'should return true' do
       expect(person.can_use_services?).to be true
     end
+
+    it 'should return correct name of person' do
+      expect(person.correct_name).to eq 'Jimmy'
+    end
+
+    it 'should return all instances of Person' do
+      expect(Person.all[0]).to be_an_instance_of Person
+    end
   end
 end
