@@ -1,5 +1,6 @@
 require_relative 'app'
 require_relative 'exe'
+require 'json'
 
 class Main
   def display_ui

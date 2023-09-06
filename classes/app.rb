@@ -3,12 +3,14 @@ require_relative 'student'
 require_relative 'teacher'
 require_relative 'book'
 require_relative 'classroom'
+require 'json'
 
 class App
   def initialize
     @persons = []
     @books = []
     @rentals = []
+    load_data
   end
 
   def list_books
@@ -94,4 +96,59 @@ class App
       puts 'Person with the given ID does not exist '
     end
   end
+
+  def save_data
+    books = Book.all.map { |book| { title: book.title, author: book.author } }
+    people = Person.all.map do |person|
+      { id: person.id, age: person.age, name: person.name, rental: [] }
+    end
+    rentals = Rental.all.map do |rental|
+      { date: rental.date, person: { id: rental.person.id, age: rental.person.age, name: rental.person.name },
+        book: { author: rental.book.author, title: rental.book.title } }
+    end
+
+    # Convert the arrays to JSON strings
+    books_json = books.to_json
+    people_json = people.to_json
+    rentals_json = rentals.to_json
+
+    # Save data in the files
+    File.write('books.json', books_json)
+    File.write('people.json', people_json)
+    File.write('rentals.json', rentals_json)
+
+    puts 'Saved successfully!'
+  end
+
+  # rubocop:disable Metrics/MethodLength
+  # rubocop:disable Metrics/Layout/LineLength
+  # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+  def load_data
+    if File.exist?('people.json')
+      file_data = File.read('people.json')
+      people_data = JSON.parse(file_data)
+      people_data.map do |data|
+        Person.new(data['age'], data['name'], data['id'])
+      end
+    end
+    if File.exist?('books.json')
+      file_data = File.read('books.json')
+      books_data = JSON.parse(file_data)
+      books_data.map do |data|
+        Book.new(data['title'], data['author'])
+      end
+    end
+    return unless File.exist?('rentals.json')
+
+    file_data = File.read('rentals.json')
+    rentals_data = JSON.parse(file_data)
+    rentals_data.map do |data|
+      Rental.new(data['date'], Person.all.find { |person| person.id == data['person']['id'] }, Book.all.find do |book|
+                                                                                                 book.title == data['book']['title']
+                                                                                               end)
+    end
+  end
 end
+# rubocop:enable Metrics/MethodLength
+# rubocop:enable Metrics/Layout/LineLength
+# rubocop:enable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
