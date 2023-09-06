@@ -21,7 +21,7 @@ describe Person do
     end
 
     it 'should return all instances of Person' do
-      expect(Person.all[0]).to be_an_instance_of Person
+      expect(Person.all[1]).to be_an_instance_of Person
     end
   end
 end
